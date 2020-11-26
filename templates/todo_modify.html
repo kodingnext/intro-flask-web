@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Todo Modify Item #{{ todo_item.id }}
+{% endblock %}
+
+{% block header %}
+<h1>Edit Todo Item #{{ todo_item.id }}</h1>
+{% endblock %}
+
+{% block content %}
+<form class="item_update_form" method="POST"
+    action="{{ url_for('update_todo_item', todo_item_id=todo_item.id) }}">
+  <input type="text" name="description" class="item_update_input" value="{{ todo_item.description }}">
+  <button type="submit" class="item_update_btn">Update</button>
+</form>
+{% endblock %}

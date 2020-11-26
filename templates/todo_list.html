@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Todo List{% endblock %}
+
+{% block header %}
+<h1>Todo List</h1>
+{% endblock %}
+
+{% block content %}
+
+{% if todo_items|length == 0 %}
+<div>There is no todo item.</div>
+{% else %}
+<ul class="list_todo_item">
+  {% for item in todo_items %}
+  <li>
+    <div class="todo_item_id">#{{ item.id }}</div>
+    <div class="todo_item_desc">{{ item.description }}</div>
+    <a class="todo_item_action" href="{{ url_for('modify_todo_item', todo_item_id=item.id) }}">Edit</a>
+    <a class="todo_item_action" href="{{ url_for('delete_todo_item', todo_item_id=item.id) }}">Delete</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<form class="item_add_form" method="POST" action="{{ url_for('create_todo_item') }}" >
+  <input type="text" name="description" class="item_add_input" placeholder="Write something">
+  <button type="submit" class="item_add_btn">Add</button>
+</form>
+{% endblock %}
